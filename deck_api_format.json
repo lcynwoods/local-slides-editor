@@ -1,0 +1,606 @@
+{
+  "title": "Proteomics Analysis Report",
+  "auto-slide-interval": 0,
+  "slide-number": false,
+  "loop": false,
+  "theme-color": "white",
+  "theme-font": "overpass",
+  "transition": "slide",
+  "slides": [
+    {
+      "id": "db47c1ccae1ed8b8ad367b54ae6bc296",
+      "blocks": [
+        {
+          "type": "text",
+          "width": 960,
+          "x": 0,
+          "y": 429,
+          "z-index": 10,
+          "line-height": "0.65",
+          "format": "h1",
+          "value": "Data summary",
+          "font-size": "50%"
+        },
+        {
+          "type": "image",
+          "width": 522,
+          "height": 204,
+          "x": 218,
+          "y": 201,
+          "z-index": 11,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/title.png"
+        }
+      ]
+    },
+    {
+      "id": "db47c1ccae1ed8b8ad367b54ae6bc696",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 2,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 3,
+          "format": "p",
+          "value": "A note on navigating the data",
+          "color": "#ffffff",
+          "font-size": "150%",
+          "align": "left"
+        },
+        {
+          "type": "text",
+          "width": 939,
+          "x": 10,
+          "y": 183,
+          "z-index": 12,
+          "background-color": "rgba(255, 255, 255, 0.53)",
+          "text-align": "left",
+          "format": "p",
+          "value": "The presentation follows a horizontal structure (→) for main content. Vertical slides (↓) are used to explore deeper details for specific datasets or provide alternate perspectives on the same data. Keep an eye out for these vertical branches during navigation. You can press theESCkey to collapse the slide deck and navigate quickly.",
+          "color": "#ffffff",
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "9a26ddbc89d3559c103a0a871250fdc5",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 2,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 3,
+          "format": "p",
+          "value": "Experimental design",
+          "color": "#ffffff",
+          "font-size": "150%",
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "9a26ddbc89d3559c103a0a871250fdc5",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 2,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 3,
+          "format": "p",
+          "value": "Analysis methods",
+          "color": "#ffffff",
+          "font-size": "150%",
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc82d3",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 3,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 4,
+          "format": "p",
+          "value": "Summary Data",
+          "color": "#ffffff",
+          "font-size": "150%",
+          "align": "left"
+        },
+        {
+          "type": "iframe",
+          "width": 555,
+          "height": 629,
+          "x": 0,
+          "y": 70,
+          "z-index": 1,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/summary_data/Proteins_by_run.html"
+        },
+        {
+          "type": "iframe",
+          "width": 424,
+          "height": 629,
+          "x": 535,
+          "y": 70,
+          "z-index": 2,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/summary_data/Peptides_by_run.html"
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc82d3",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 2,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 3,
+          "format": "p",
+          "value": "Summary Data",
+          "color": "#ffffff",
+          "font-size": "150%",
+          "align": "left"
+        },
+        {
+          "type": "iframe",
+          "width": 960,
+          "height": 629,
+          "x": 0,
+          "y": 70,
+          "z-index": 1,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/summary_data/Intensity_by_run.html"
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc82d5",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 3,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 4,
+          "format": "p",
+          "value": "Data Preparation",
+          "color": "#ffffff",
+          "font-size": "150%",
+          "align": "left"
+        },
+        {
+          "type": "iframe",
+          "width": 960,
+          "height": 350,
+          "x": 0,
+          "y": 340,
+          "z-index": 1,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/summary_data/Analysis_Analysis 1/log2FC_intensity_dist_with_NONE_normalization.html"
+        },
+        {
+          "type": "iframe",
+          "width": 960,
+          "height": 350,
+          "x": 0,
+          "y": 60,
+          "z-index": 2,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/summary_data/Analysis_Analysis 1/log2FC_intensity_dist_with_LOESS_normalization.html"
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc8244",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 2,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 3,
+          "format": "p",
+          "value": "Summary data",
+          "color": "#ffffff",
+          "font-size": "150%",
+          "align": "left"
+        },
+        {
+          "type": "image",
+          "width": 960,
+          "height": 600,
+          "x": 0,
+          "y": 80,
+          "z-index": 1,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/summary_data/Analysis_Analysis 1/Cluster_normed_intensities.png",
+          "natural-width": 1900,
+          "natural-height": 1200
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc8244",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 2,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 3,
+          "format": "p",
+          "value": "Summary data",
+          "color": "#ffffff",
+          "font-size": "150%",
+          "align": "left"
+        },
+        {
+          "type": "iframe",
+          "width": 960,
+          "height": 630,
+          "x": 0,
+          "y": 70,
+          "z-index": 1,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/summary_data/Analysis_Analysis 1/PCA_normed_intensities.html"
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc8244",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 2,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 3,
+          "format": "p",
+          "value": "Summary data",
+          "color": "#ffffff",
+          "font-size": "150%",
+          "align": "left"
+        },
+        {
+          "type": "iframe",
+          "width": 960,
+          "height": 630,
+          "x": 0,
+          "y": 70,
+          "z-index": 1,
+          "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/summary_data/Analysis_Analysis 1/UMAP_normed_intensities.html"
+        }
+      ]
+    },
+    [
+      {
+        "id": "3910a9374e8d9ef66bf433f4c5cc82d7",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 2,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 3,
+            "format": "p",
+            "value": "Differential Analysis Data",
+            "color": "#ffffff",
+            "font-size": "150%",
+            "align": "left"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 1,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/DA_data/Analysis_Analysis 1/PANC1-HAPLN1_vs_PANC1_volcano_plot.html"
+          }
+        ]
+      },
+      {
+        "id": "3910a9374e8d9ef66bf433f4c5cc82d7",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 2,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 3,
+            "format": "p",
+            "value": "Overrepresentation Analysis",
+            "color": "#ffffff",
+            "font-size": "150%",
+            "align": "left"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 1,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/ORA_data/Analysis_Analysis 1/Up in PANC1-HAPLN1 vs PANC1/GO_Molecular_Function_2025.html"
+          }
+        ]
+      },
+      {
+        "id": "3910a9374e8d9ef66bf433f4c5cc82d7",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 2,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 3,
+            "format": "p",
+            "value": "Overrepresentation Analysis",
+            "color": "#ffffff",
+            "font-size": "150%",
+            "align": "left"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 1,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/ORA_data/Analysis_Analysis 1/Up in PANC1-HAPLN1 vs PANC1/Reactome_Pathways_2024.html"
+          }
+        ]
+      },
+      {
+        "id": "3910a9374e8d9ef66bf433f4c5cc82d7",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 2,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 3,
+            "format": "p",
+            "value": "Overrepresentation Analysis",
+            "color": "#ffffff",
+            "font-size": "150%",
+            "align": "left"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 1,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/ORA_data/Analysis_Analysis 1/Down in PANC1-HAPLN1 vs PANC1/GO_Molecular_Function_2025.html"
+          }
+        ]
+      },
+      {
+        "id": "3910a9374e8d9ef66bf433f4c5cc82d7",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 2,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 3,
+            "format": "p",
+            "value": "Overrepresentation Analysis",
+            "color": "#ffffff",
+            "font-size": "150%",
+            "align": "left"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 1,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/ORA_data/Analysis_Analysis 1/Down in PANC1-HAPLN1 vs PANC1/Reactome_Pathways_2024.html"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "3910a9374e8d9ef66bf433f4c5cc82d7",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 2,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 3,
+            "format": "p",
+            "value": "GSEA",
+            "color": "#ffffff",
+            "font-size": "150%",
+            "align": "left"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 1,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/GSEA_data/Analysis_Analysis 1/PANC1-HAPLN1_vs_PANC1/GO_Molecular_Function_2025.html"
+          }
+        ]
+      },
+      {
+        "id": "3910a9374e8d9ef66bf433f4c5cc82d7",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 2,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/config/images/banner.png"
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 3,
+            "format": "p",
+            "value": "GSEA",
+            "color": "#ffffff",
+            "font-size": "150%",
+            "align": "left"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 1,
+            "value": "https://lcynwoods.github.io/PANC1_HAPLN1_data/plots/GSEA_data/Analysis_Analysis 1/PANC1-HAPLN1_vs_PANC1/Reactome_Pathways_2024.html"
+          }
+        ]
+      }
+    ]
+  ]
+}

@@ -1,0 +1,17 @@
+# Slides Editor - Python Dependencies
+
+# Core application
+nicegui>=1.4.0
+aiohttp>=3.9.0
+pyperclip>=1.8.2
+appdirs>=1.4.4
+
+# API and HTTP
+requests>=2.31.0
+
+# Utilities
+python-dotenv>=1.0.0
+
+# For packaging (dev)
+pyinstaller>=6.0.0
+# nuitka>=1.8.0  # Alternative to PyInstaller

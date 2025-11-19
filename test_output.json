@@ -1,0 +1,919 @@
+{
+  "title": "PANC1-HAPLN1",
+  "auto-slide-interval": 0,
+  "slide-number": false,
+  "loop": false,
+  "theme-color": "white",
+  "theme-font": "overpass",
+  "transition": "slide",
+  "slides": [
+    {
+      "id": "db47c1ccae1ed8b8ad367b54ae6bc296",
+      "blocks": [
+        {
+          "type": "text",
+          "width": 960,
+          "x": 0,
+          "y": 429,
+          "z-index": 10,
+          "line-height": "0.65",
+          "format": "h1",
+          "value": "<h1><span style=\"font-size:0.5em\">Data summary</span></h1>",
+          "text": "Data summary"
+        },
+        {
+          "type": "image",
+          "width": 522,
+          "height": 204,
+          "x": 218,
+          "y": 201,
+          "z-index": 11,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/e0d2ffd3eebf61cb3a571b83c2af7a6c.png",
+          "natural-width": 1104,
+          "natural-height": 431
+        }
+      ]
+    },
+    {
+      "id": "db47c1ccae1ed8b8ad367b54ae6bc696",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 2,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 3,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"font-size:42px; color:#ffffff;\">A note on navigating the data</span></p>",
+          "text": "A note on navigating the data"
+        },
+        {
+          "type": "text",
+          "width": 939,
+          "x": 10,
+          "y": 183,
+          "z-index": 12,
+          "background-color": "rgba(255, 255, 255, 0.53)",
+          "text-align": "left",
+          "format": "p",
+          "value": "<p>The presentation follows a horizontal structure (<span style=\"color:#FFA500\"><strong>\u2192</strong></span>) for main content. Vertical slides (<span style=\"color:#FF8C00\"><strong>\u2193</strong></span>) are used to explore deeper details for specific datasets or provide alternate perspectives on the same data. Keep an eye out for these vertical branches during navigation. You can press the <span style=\"color:#FF8C00\"><strong>ESC</strong></span>\u00a0key to collapse the slide deck and navigate quickly.</p>",
+          "text": "The presentation follows a horizontal structure (\u2192) for main content. Vertical slides (\u2193) are used to explore deeper details for specific datasets or provide alternate perspectives on the same data. Keep an eye out for these vertical branches during navigation. You can press theESCkey to collapse the slide deck and navigate quickly."
+        }
+      ]
+    },
+    {
+      "id": "9a26ddbc89d3559c103a0a871250fdc5",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 10,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 11,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"font-size:42px; color:#ffffff;\">Experimental design</span></p>",
+          "text": "Experimental design"
+        },
+        {
+          "type": "text",
+          "width": 114,
+          "x": 12,
+          "y": 371,
+          "z-index": 18,
+          "format": "p",
+          "value": "<p>Vial 1</p>",
+          "text": "Vial 1"
+        },
+        {
+          "type": "text",
+          "width": 114,
+          "x": 12,
+          "y": 455,
+          "z-index": 19,
+          "format": "p",
+          "value": "<p>Vial 2</p>",
+          "text": "Vial 2"
+        },
+        {
+          "type": "text",
+          "width": 114,
+          "x": 12,
+          "y": 538,
+          "z-index": 20,
+          "format": "p",
+          "value": "<p>Vial 5</p>",
+          "text": "Vial 5"
+        },
+        {
+          "type": "text",
+          "width": 114,
+          "x": 436,
+          "y": 455,
+          "z-index": 21,
+          "format": "p",
+          "value": "<p>Vial 3</p>",
+          "text": "Vial 3"
+        },
+        {
+          "type": "text",
+          "width": 114,
+          "x": 436,
+          "y": 538,
+          "z-index": 22,
+          "format": "p",
+          "value": "<p>Vial 6</p>",
+          "text": "Vial 6"
+        },
+        {
+          "type": "text",
+          "width": 114,
+          "x": 436,
+          "y": 371,
+          "z-index": 23,
+          "format": "p",
+          "value": "<p>Vial 4</p>",
+          "text": "Vial 4"
+        },
+        {
+          "type": "image",
+          "width": 362,
+          "height": 363,
+          "x": 597,
+          "y": 201,
+          "z-index": 24,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/d5eb7c0c235dc7f81f3bd65919f34650.png",
+          "natural-width": 558,
+          "natural-height": 559
+        },
+        {
+          "type": "text",
+          "width": 172,
+          "x": 321,
+          "y": 274,
+          "z-index": 15,
+          "background-color": "rgb(211, 98, 31)",
+          "font-size": "110%",
+          "format": "p",
+          "value": "<p><span style=\"font-size:0.7em\">PANC1-HAPLN1</span></p>",
+          "text": "PANC1-HAPLN1"
+        },
+        {
+          "type": "text",
+          "width": 160,
+          "x": 114,
+          "y": 274,
+          "z-index": 16,
+          "background-color": "rgb(104, 180, 230)",
+          "font-size": "110%",
+          "format": "p",
+          "value": "<p><span style=\"font-size:0.7em\">PANC1</span></p>",
+          "text": "PANC1"
+        },
+        {
+          "type": "text",
+          "width": 342,
+          "x": 129,
+          "y": 181,
+          "z-index": 17,
+          "background-color": "rgb(0, 0, 0)",
+          "format": "p",
+          "value": "<p><span style=\"font-size:1.0em\">Cancer cell line</span></p>",
+          "text": "Cancer cell line"
+        },
+        {
+          "type": "image",
+          "width": 488,
+          "height": 427,
+          "x": 99,
+          "y": 154,
+          "z-index": 12,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/97278dd14dc53e49ff53b6ff255eb4f1.png",
+          "crop-x": 0.238281,
+          "crop-y": 0.0,
+          "crop-width": 0.636719,
+          "crop-height": 0.824324,
+          "natural-width": 2001,
+          "natural-height": 1350
+        },
+        {
+          "type": "html",
+          "width": 24,
+          "height": 27,
+          "x": 114,
+          "y": 554,
+          "z-index": 13,
+          "value": "<div class=\"shape\"></div>"
+        },
+        {
+          "type": "html",
+          "width": 24,
+          "height": 27,
+          "x": 329,
+          "y": 554,
+          "z-index": 14,
+          "value": "<div class=\"shape\"></div>"
+        },
+        {
+          "type": "html",
+          "width": 92,
+          "height": 89,
+          "x": 357,
+          "y": 340,
+          "z-index": 26,
+          "value": "<div class=\"shape\"></div>"
+        }
+      ]
+    },
+    {
+      "id": "d9b293116d4d908691b4974b8a3618af",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 10,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 11,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"font-size:42px; color:#ffffff;\">Analysis methods</span></p>",
+          "text": "Analysis methods"
+        },
+        {
+          "type": "image",
+          "width": 876,
+          "height": 348,
+          "x": 41,
+          "y": 188,
+          "z-index": 12,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/b6255d81be6b734f1100b954729b1340.png",
+          "natural-width": 2500,
+          "natural-height": 993
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc82d3",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 3,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 4,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"font-size:42px; color:#ffffff;\">Summary Data</span></p>",
+          "text": "Summary Data"
+        },
+        {
+          "type": "iframe",
+          "width": 555,
+          "height": 629,
+          "x": 0,
+          "y": 70,
+          "z-index": 1,
+          "value": "PANC1_HAPLN1_data/plots/summary_data/Proteins_by_run.html"
+        },
+        {
+          "type": "iframe",
+          "width": 424,
+          "height": 629,
+          "x": 535,
+          "y": 70,
+          "z-index": 2,
+          "value": "PANC1_HAPLN1_data/plots/summary_data/Peptides_by_run.html"
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc82d3",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 2,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 3,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"font-size:42px; color:#ffffff;\">Summary Data</span></p>",
+          "text": "Summary Data"
+        },
+        {
+          "type": "iframe",
+          "width": 960,
+          "height": 629,
+          "x": 0,
+          "y": 70,
+          "z-index": 1,
+          "value": "PANC1_HAPLN1_data/plots/summary_data/Intensity_by_run.html"
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc82d5",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 12,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 13,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"font-size:42px; color:#ffffff;\">Data Preparation</span></p>",
+          "text": "Data Preparation"
+        },
+        {
+          "type": "iframe",
+          "width": 960,
+          "height": 350,
+          "x": 0,
+          "y": 35,
+          "z-index": 10,
+          "value": "PANC1_HAPLN1_data/plots/summary_data/Analysis_Analysis 1/log2FC_intensity_dist_with_NONE_normalization.html"
+        },
+        {
+          "type": "iframe",
+          "width": 960,
+          "height": 350,
+          "x": 0,
+          "y": 350,
+          "z-index": 11,
+          "value": "PANC1_HAPLN1_data/plots/summary_data/Analysis_Analysis 1/log2FC_intensity_dist_with_LOESS_normalization.html"
+        },
+        {
+          "type": "text",
+          "width": 263,
+          "x": 697,
+          "y": 641,
+          "z-index": 14,
+          "font-size": "50%",
+          "format": "p",
+          "value": "<p>What's LOESS? Click <strong><a href=\"https://www.bing.com/videos/riverview/relatedvideo?q=loess+youtube&amp;mid=8F5AF4DDF9192FC711828F5AF4DDF9192FC71182&amp;FORM=VIRE\" target=\"_blank\">here</a></strong>\u00a0for a video explainer from the University of North Carolina Genetics Department.</p>",
+          "text": "What's LOESS? Clickherefor a video explainer from the University of North Carolina Genetics Department."
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc8244",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 2,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 3,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"font-size:42px; color:#ffffff;\">Summary data</span></p>",
+          "text": "Summary data"
+        },
+        {
+          "type": "image",
+          "width": 713,
+          "height": 629,
+          "x": 123,
+          "y": 70,
+          "z-index": 1,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/840b749b93d4f36828b1b0c9ddde81e4.png",
+          "crop-x": 0.0,
+          "crop-y": 0.0,
+          "crop-width": 0.711458,
+          "crop-height": 0.993333,
+          "natural-width": 1900,
+          "natural-height": 1200
+        }
+      ]
+    },
+    {
+      "id": "3cd2e58f30fc45e16b88cfbd92263072",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 10,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 11,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"font-size:42px; color:#ffffff;\">Summary data</span></p>",
+          "text": "Summary data"
+        },
+        {
+          "type": "iframe",
+          "width": 960,
+          "height": 630,
+          "x": 0,
+          "y": 70,
+          "z-index": 12,
+          "value": "PANC1_HAPLN1_data/plots/summary_data/Analysis_Analysis 1/PCA\n_normed_intensities.html"
+        }
+      ]
+    },
+    {
+      "id": "3910a9374e8d9ef66bf433f4c5cc8244",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 11,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 12,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"font-size:42px; color:#ffffff;\">Summary data</span></p>",
+          "text": "Summary data"
+        },
+        {
+          "type": "iframe",
+          "width": 960,
+          "height": 630,
+          "x": 0,
+          "y": 70,
+          "z-index": 10,
+          "value": "PANC1_HAPLN1_data/plots/summary_data/Analysis_Analysis 1/UMAP_normed_intensities.html"
+        },
+        {
+          "type": "text",
+          "width": 218,
+          "x": 741,
+          "y": 657,
+          "z-index": 13,
+          "font-size": "50%",
+          "format": "p",
+          "value": "<p style=\"text-align:left\">Not familiar with UMAP?</p>",
+          "text": "Not familiar with UMAP?"
+        }
+      ]
+    },
+    {
+      "id": "4e6265fdeac2dbe19e15c094488bf768",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 10,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 192,
+          "y": 7,
+          "z-index": 11,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"font-size:42px\">Differential Abundance (DA) Analysis</span></p>",
+          "text": "Differential Abundance (DA) Analysis"
+        },
+        {
+          "type": "text",
+          "width": 859,
+          "x": 50,
+          "y": 193,
+          "z-index": 12,
+          "format": "p",
+          "value": "<p style=\"text-align:left\">The next slides examine the differential abundance between conditions in comparisons of interest.</p>",
+          "text": "The next slides examine the differential abundance between conditions in comparisons of interest."
+        },
+        {
+          "type": "text",
+          "width": 859,
+          "x": 50,
+          "y": 438,
+          "z-index": 13,
+          "format": "p",
+          "value": "<p style=\"text-align:left\">Keep in mind that as one condition had fewer than 3 samples, results of the following should be interpretated very carefully as statistical power is lacking.</p>",
+          "text": "Keep in mind that as one condition had fewer than 3 samples, results of the following should be interpretated very carefully as statistical power is lacking."
+        }
+      ]
+    },
+    [
+      {
+        "id": "7d3fba711952a38f05eff99dbf05c8d0",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 11,
+            "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+            "natural-width": 2500,
+            "natural-height": 184
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 12,
+            "format": "p",
+            "value": "<p style=\"text-align:left\"><span style=\"color:#ffffff; font-size:42px\">DA data</span></p>",
+            "text": "DA data"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 10,
+            "value": "PANC1_HAPLN1_data/plots/DA_data/Analysis_Analysis 1\n/PANC1-HAPLN1_vs_PANC1_volcano_plot.html"
+          }
+        ]
+      },
+      {
+        "id": "6e1658d7233a11434818efac46813191",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 11,
+            "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+            "natural-width": 2500,
+            "natural-height": 184
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 12,
+            "format": "p",
+            "value": "<p style=\"text-align:left\"><span style=\"color:#ffffff; font-size:42px\">ORA data</span></p>",
+            "text": "ORA data"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 10,
+            "value": "PANC1_HAPLN1_data/plots/ORA_data/Analysis_Analysis 1/Up in PANC1-HAPLN1 vs PANC1/GO_Molecular_Function_2025.html"
+          }
+        ]
+      },
+      {
+        "id": "cbcdcf47cdc0c27bf595cccbbf824461",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 11,
+            "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+            "natural-width": 2500,
+            "natural-height": 184
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 12,
+            "format": "p",
+            "value": "<p style=\"text-align:left\"><span style=\"color:#ffffff; font-size:42px\">ORA data</span></p>",
+            "text": "ORA data"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 10,
+            "value": "PANC1_HAPLN1_data/plots/ORA_data/Analysis_Analysis 1/Up in PANC1-HAPLN1 vs PANC1/Reactome_Pathways_2024\n.html"
+          }
+        ]
+      },
+      {
+        "id": "e02e72d239cbbddec8168ddc01167711",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 11,
+            "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+            "natural-width": 2500,
+            "natural-height": 184
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 12,
+            "format": "p",
+            "value": "<p style=\"text-align:left\"><span style=\"color:#ffffff; font-size:42px\">ORA data</span></p>",
+            "text": "ORA data"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 10,
+            "value": "PANC1_HAPLN1_data/plots/ORA_data/Analysis_Analysis 1/Down in PANC1-HAPLN1 vs PANC1/GO_Molecular_Function_2025.html"
+          }
+        ]
+      },
+      {
+        "id": "a53fd95d00bc7b4cf24aac2c4c7227bf",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 11,
+            "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+            "natural-width": 2500,
+            "natural-height": 184
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 12,
+            "format": "p",
+            "value": "<p style=\"text-align:left\"><span style=\"color:#ffffff; font-size:42px\">ORA data</span></p>",
+            "text": "ORA data"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 10,
+            "value": "PANC1_HAPLN1_data/plots/ORA_data/Analysis_Analysis 1/Down in PANC1-HAPLN1 vs PANC1/Reactome_Pathways_2024\n.html"
+          }
+        ]
+      }
+    ],
+    {
+      "id": "7cff2f3bb39d1b008bdd0fa39bac583c",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 10,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+          "natural-width": 2500,
+          "natural-height": 184
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 11,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"color:#ffffff; font-size:42px\">Gene Set Enrichment Analysis</span></p>",
+          "text": "Gene Set Enrichment Analysis"
+        },
+        {
+          "type": "text",
+          "width": 816,
+          "x": 72,
+          "y": 272,
+          "z-index": 12,
+          "format": "p",
+          "value": "<p style=\"text-align:left\">We can also perform a gene set enrichment analysis (GSEA). This differs from an ORA because here we consider all proteins, rather than a subset that meet specific criteria, such as logFC. This may identify more subtle patterns of protein co-expression.</p>",
+          "text": "We can also perform a gene set enrichment analysis (GSEA). This differs from an ORA because here we consider all proteins, rather than a subset that meet specific criteria, such as logFC. This may identify more subtle patterns of protein co-expression."
+        }
+      ]
+    },
+    [
+      {
+        "id": "7929fec4882ba3f7a0f02cd0fb878377",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 11,
+            "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+            "natural-width": 2500,
+            "natural-height": 184
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 12,
+            "format": "p",
+            "value": "<p style=\"text-align:left\"><span style=\"color:#ffffff; font-size:42px\">GSEA analysis</span></p>",
+            "text": "GSEA analysis"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 10,
+            "value": "PANC1_HAPLN1_data/plots/GSEA_data/Analysis_Analysis 1/PANC1-HAPLN1_vs_PANC1/GO_Molecular_Function_2025.html"
+          }
+        ]
+      },
+      {
+        "id": "50fd2c016cd8e2734fba8848f4673cf0",
+        "blocks": [
+          {
+            "type": "image",
+            "width": 960,
+            "height": 70,
+            "x": 0,
+            "y": 0,
+            "z-index": 11,
+            "value": "PANC1_HAPLN1_data/config/panc1-hapn/2a53a908d3a498a49b29920818502637.png",
+            "natural-width": 2500,
+            "natural-height": 184
+          },
+          {
+            "type": "text",
+            "width": 717,
+            "x": 206,
+            "y": 7,
+            "z-index": 12,
+            "format": "p",
+            "value": "<p style=\"text-align:left\"><span style=\"color:#ffffff; font-size:42px\">GSEA analysis</span></p>",
+            "text": "GSEA analysis"
+          },
+          {
+            "type": "iframe",
+            "width": 960,
+            "height": 630,
+            "x": 0,
+            "y": 70,
+            "z-index": 10,
+            "value": "PANC1_HAPLN1_data/plots/GSEA_data/Analysis_Analysis 1/PANC1-HAPLN1_vs_PANC1/Reactome_Pathways_2024.html"
+          }
+        ]
+      }
+    ],
+    {
+      "id": "3800c4f383bbe138204c8ece09d176f3",
+      "blocks": [
+        {
+          "type": "image",
+          "width": 960,
+          "height": 70,
+          "x": 0,
+          "y": 0,
+          "z-index": 10,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/d1d2db7b6983ef7b9be3c3d3188f2f66.png"
+        },
+        {
+          "type": "text",
+          "width": 717,
+          "x": 206,
+          "y": 7,
+          "z-index": 11,
+          "format": "p",
+          "value": "<p style=\"text-align:left\"><span style=\"color:#ffffff; font-size:42px\">Data availability</span></p>",
+          "text": "Data availability"
+        },
+        {
+          "type": "text",
+          "width": 785,
+          "x": 88,
+          "y": 173,
+          "z-index": 12,
+          "format": "p",
+          "value": "<p style=\"text-align:left\">You can find the full set of results, including an Excel workbook, tables and plots used in this presentation in the data folder that was delivered along with this presentation.</p>",
+          "text": "You can find the full set of results, including an Excel workbook, tables and plots used in this presentation in the data folder that was delivered along with this presentation."
+        },
+        {
+          "type": "image",
+          "width": 371,
+          "height": 145,
+          "x": 295,
+          "y": 438,
+          "z-index": 13,
+          "value": "PANC1_HAPLN1_data/config/panc1-hapn/35533aeef240b60c5691c4b09021adb4.png",
+          "natural-width": 1104,
+          "natural-height": 431
+        }
+      ]
+    }
+  ]
+}
