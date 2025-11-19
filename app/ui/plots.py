@@ -15,8 +15,9 @@ from ..utils.file_utils import get_plot_files
 class PlotsPage:
     """Plots page component."""
     
-    def __init__(self, config: Config):
+    def __init__(self, config: Config, session=None):
         self.config = config
+        self.session = session
         self.search_term: str = ''
         self.plot_container: Optional[ui.column] = None
     
@@ -52,7 +53,7 @@ class PlotsPage:
                 ui.button('Refresh', on_click=self._render_plot_list, icon='refresh')
                 
                 # Open plots folder button
-                plots_folder = self.config.get_plots_folder()
+                plots_folder = self.session.extracted_folder if self.session else None
                 if plots_folder:
                     ui.button(
                         'Open Folder',
@@ -81,11 +82,11 @@ class PlotsPage:
         
         self.plot_container.clear()
         
-        plots_folder = self.config.get_plots_folder()
+        plots_folder = self.session.extracted_folder if self.session else None
         
         if not plots_folder:
             with self.plot_container:
-                ui.label('No plots folder configured. Please select a session folder with a "plots" subfolder.')
+                ui.label('ℹ️ Upload a ZIP file on the Home page to see plots here.')
             return
         
         plot_files = get_plot_files(plots_folder)
@@ -110,7 +111,10 @@ class PlotsPage:
     
     def _render_plot_card(self, plot_file: Path):
         """Render a single plot file card."""
-        plots_folder = self.config.get_plots_folder()
+        plots_folder = self.session.extracted_folder if self.session else None
+        
+        if not plots_folder:
+            return
         
         # Get relative path from plots folder
         relative_path = plot_file.relative_to(plots_folder)

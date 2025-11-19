@@ -14,6 +14,25 @@ from app.ui.home import HomePage
 from app.ui.plots import PlotsPage
 from app.ui.advanced import AdvancedPage
 
+
+class SessionState:
+    """In-memory session state (not persisted)."""
+    def __init__(self):
+        self.extracted_folder: Path = None  # Main ZIP extraction
+        self.user_uploads_folder: Path = None  # Future: user-added files
+        self.reveal_slides: list[Path] = []  # Detected reveal.js files
+        self.plot_files: list[Path] = []  # Detected plot HTML files
+        self.server_running: bool = False  # Server status
+    
+    def reset(self):
+        """Clear session state."""
+        self.extracted_folder = None
+        self.user_uploads_folder = None
+        self.reveal_slides = []
+        self.plot_files = []
+        # Don't reset server_running - that's independent
+
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -21,15 +40,19 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Suppress noisy asyncio connection errors on Windows
+logging.getLogger('asyncio').setLevel(logging.CRITICAL)
+
 
 class SlidesEditorApp:
     """Main application class."""
     
     def __init__(self):
         self.config = Config()
+        self.session = SessionState()  # In-memory session state
         self.plot_server: PlotServer = None
         self.https_server: HTTPSPlotServer = None
-        # Always create servers (they'll serve from extracted folder when available)
+        # Create servers (not started until user clicks Start)
         self._create_servers()
     
     def _create_servers(self):
@@ -57,7 +80,7 @@ class SlidesEditorApp:
     
     async def start_plot_server(self):
         """Start the plot servers."""
-        if self.config.server_running:
+        if self.session.server_running:
             logger.info("Servers already running")
             return
             
@@ -75,11 +98,11 @@ class SlidesEditorApp:
             except Exception as e:
                 logger.error(f"Failed to start HTTPS plot server: {e}")
         
-        self.config.server_running = True
+        self.session.server_running = True
     
     async def stop_plot_server(self):
         """Stop the plot servers."""
-        if not self.config.server_running:
+        if not self.session.server_running:
             logger.info("Servers not running")
             return
             
@@ -97,7 +120,7 @@ class SlidesEditorApp:
             except Exception as e:
                 logger.error(f"Failed to stop HTTPS plot server: {e}")
         
-        self.config.server_running = False
+        self.session.server_running = False
     
     def _render_header(self):
         """Render page header with navigation."""
@@ -126,7 +149,7 @@ class SlidesEditorApp:
         def home_page():
             """Home page route."""
             self._render_header()
-            home = HomePage(self.config)
+            home = HomePage(self.config, self.session, self)
             home.render()
             self._render_footer()
         
@@ -134,7 +157,7 @@ class SlidesEditorApp:
         def plots_page():
             """Plots page route."""
             self._render_header()
-            plots = PlotsPage(self.config)
+            plots = PlotsPage(self.config, self.session)
             plots.render()
             self._render_footer()
         
@@ -151,8 +174,7 @@ class SlidesEditorApp:
         # Set up UI
         self.setup_ui()
         
-        # Schedule plot server startup
-        app.on_startup(self.start_plot_server)
+        # Stop servers on shutdown (if running)
         app.on_shutdown(self.stop_plot_server)
         
         # Run NiceGUI app
