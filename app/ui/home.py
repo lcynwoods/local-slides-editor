@@ -67,6 +67,11 @@ class HomePage:
         
         ui.separator()
         
+        # Download & Reconstitute
+        self._render_download_section()
+        
+        ui.separator()
+        
         # Status
         with ui.card().classes('w-full'):
             ui.label('Status').classes('text-h6')
@@ -179,6 +184,21 @@ class HomePage:
                 ui.label('⚠️ Upload a ZIP with reveal.js slides first').classes('text-orange-7')
             else:
                 ui.label('✅ Ready to upload').classes('text-green-7')
+    
+    def _render_download_section(self):
+        """Render download & reconstitute section."""
+        with ui.card().classes('w-full'):
+            ui.label('Download & Reconstitute').classes('text-h6')
+            ui.label('Download from Slides.com and convert back to local paths').classes('text-sm text-grey-7')
+            
+            ui.upload(
+                label='📥 Select Downloaded ZIP',
+                on_upload=self._handle_download_reconstitute,
+                auto_upload=True,
+                multiple=False
+            ).props('accept=".zip" color="secondary"').classes('w-full')
+            
+            ui.label('ℹ️ Converts HTTPS URLs back to local paths for client delivery').classes('text-sm text-grey-5 mt-2')
     
     async def _handle_zip_upload(self, e):
         """Handle ZIP file upload and extraction."""
@@ -323,6 +343,83 @@ class HomePage:
                         block['value'] = f"{base_url}/plots/{encoded_path}"
                     except Exception as e:
                         logger.warning(f"Could not transform URL {old_path}: {e}")
+    
+    async def _handle_download_reconstitute(self, e):
+        """Handle downloaded ZIP from Slides.com and reconstitute for delivery."""
+        try:
+            self._update_status('Processing download...')
+            
+            # Get file content
+            filename = e.file.name
+            content = await e.file.read()
+            
+            # Save to temp
+            downloaded_zip = Path(tempfile.gettempdir()) / filename
+            downloaded_zip.write_bytes(content)
+            
+            # Extract downloaded ZIP
+            download_folder = Path(tempfile.gettempdir()) / 'slides_download' / downloaded_zip.stem
+            download_folder.mkdir(parents=True, exist_ok=True)
+            
+            self._update_status('Extracting...')
+            extract_deck_zip(downloaded_zip, download_folder)
+            
+            # Find index.html
+            index_file = download_folder / 'index.html'
+            if not index_file.exists():
+                ui.notify('No index.html found in downloaded ZIP', type='negative')
+                return
+            
+            # Read and transform URLs
+            self._update_status('Converting URLs to local paths...')
+            html_content = index_file.read_text(encoding='utf-8')
+            
+            # Replace HTTPS URLs with local paths
+            # Pattern: https://localhost:8766/plots/... → data/...
+            https_port = self.config.local_server_port + 1
+            base_https = f'https://localhost:{https_port}/plots/'
+            
+            # Simple replacement: HTTPS server URLs → data/ folder
+            html_content = html_content.replace(base_https, 'data/')
+            
+            # Also decode URL-encoded characters
+            from urllib.parse import unquote
+            # Find all data/ references and decode them
+            import re
+            def decode_path(match):
+                path = match.group(1)
+                return f'"data/{unquote(path)}"'
+            
+            html_content = re.sub(r'"data/([^"]+)"', decode_path, html_content)
+            
+            # Write updated index.html
+            index_file.write_text(html_content, encoding='utf-8')
+            
+            # Copy plot files to data/ folder if we have session data
+            if self.session.extracted_folder and self.session.extracted_folder.exists():
+                data_folder = download_folder / 'data'
+                data_folder.mkdir(exist_ok=True)
+                
+                self._update_status('Copying plot files...')
+                # Copy all plot files from session
+                for plot_file in self.session.plot_files:
+                    rel_path = plot_file.relative_to(self.session.extracted_folder)
+                    dest_file = data_folder / rel_path
+                    dest_file.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy(plot_file, dest_file)
+            
+            # Success - open folder
+            ui.notify(f'✅ Reconstituted deck ready at: {download_folder}', type='positive', timeout=5000)
+            self._update_status(f'Ready at: {download_folder}')
+            
+            # Open in file explorer
+            import subprocess
+            subprocess.run(['explorer', str(download_folder)])
+            
+        except Exception as e:
+            logger.error(f'Error reconstituting download: {e}', exc_info=True)
+            ui.notify(f'Error: {e}', type='negative')
+            self._update_status('Error processing download')
     
     def _update_status(self, message: str):
         """Update status label."""

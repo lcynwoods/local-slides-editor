@@ -110,7 +110,7 @@ class PlotsPage:
                 self._render_plot_card(plot_file)
     
     def _render_plot_card(self, plot_file: Path):
-        """Render a single plot file card."""
+        """Render a single plot file card with preview."""
         plots_folder = self.session.extracted_folder if self.session else None
         
         if not plots_folder:
@@ -127,11 +127,9 @@ class PlotsPage:
         plot_url = f'https://localhost:{https_port}/plots/{encoded_path}'
         iframe_code = f'<iframe src="{plot_url}" width="100%" height="500"></iframe>'
         
-        with ui.card().classes('w-full cursor-pointer hover:bg-grey-2').on(
-            'click',
-            lambda: self._copy_url(iframe_code, plot_file.name)
-        ):
-            with ui.row().classes('w-full items-center gap-4'):
+        with ui.card().classes('w-full'):
+            # Header with file info and actions
+            with ui.row().classes('w-full items-center gap-4 mb-2'):
                 # Icon
                 ui.icon('insert_chart', size='lg').classes('text-blue-5')
                 
@@ -149,17 +147,17 @@ class PlotsPage:
                     ui.button(
                         icon='content_copy',
                         on_click=lambda: self._copy_url(iframe_code, plot_file.name)
-                    ).props('flat round')
+                    ).props('flat').tooltip('Copy iframe code')
                     
                     ui.button(
-                        icon='open_in_browser',
-                        on_click=lambda p=plot_url: ui.navigate.to(p, new_tab=True)
-                    ).props('flat round')
-                    
-                    ui.button(
-                        icon='code',
-                        on_click=lambda: self._show_iframe_dialog(iframe_code, plot_file.name)
-                    ).props('flat round')
+                        icon='open_in_new',
+                        on_click=lambda: ui.open(plot_url, new_tab=True)
+                    ).props('flat').tooltip('Open in new tab')
+            
+            # Expandable preview
+            with ui.expansion('Preview', icon='visibility').classes('w-full'):
+                # Embed the plot as iframe
+                ui.html(f'<iframe src="{plot_url}" width="100%" height="500" frameborder="0"></iframe>', sanitize=False)
     
     def _copy_url(self, iframe_code: str, filename: str):
         """Copy iframe URL to clipboard."""
