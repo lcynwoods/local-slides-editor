@@ -1,3 +1,4 @@
+﻿# -*- coding: utf-8 -*-
 """
 Simplified home page - ZIP upload workflow with manual server control.
 """
@@ -8,6 +9,10 @@ import logging
 import tempfile
 import shutil
 from urllib.parse import quote
+import base64
+import mimetypes
+import hashlib
+import re
 
 from ..config import Config
 from ..slides_api import create_deck_via_define_api
@@ -43,7 +48,7 @@ class HomePage:
     def _render_content(self):
         """Render page content."""
         ui.markdown('# 📊 Slides Editor')
-        ui.markdown('*Upload reveal.js ZIP → Auto-detect slides → Upload to Slides.com*')
+        ui.markdown('*Upload reveal.js ZIP \u2192 Auto-detect slides \u2192 Upload to Slides.com*')
         
         ui.separator()
         
@@ -139,7 +144,7 @@ class HomePage:
             
             # Reveal.js slides
             if self.session.reveal_slides:
-                ui.label(f'✅ Found {len(self.session.reveal_slides)} reveal.js slide(s)').classes('text-green-7 font-bold')
+                ui.label(f'âœ… Found {len(self.session.reveal_slides)} reveal.js slide(s)').classes('text-green-7 font-bold')
                 for slide_file in self.session.reveal_slides:
                     rel_path = slide_file.relative_to(self.session.extracted_folder)
                     ui.label(f'  📄 {rel_path}').classes('ml-4 text-sm')
@@ -168,7 +173,7 @@ class HomePage:
             server_running = self.session.server_running
             
             btn = ui.button(
-                '⬆️ Create Deck (Opens Browser)',
+                '\u2b06\ufe0f Create Deck (Opens Browser)',
                 on_click=self._upload_to_slides,
                 icon='cloud_upload',
                 color='primary'
@@ -183,7 +188,7 @@ class HomePage:
             elif not has_slides:
                 ui.label('⚠️ Upload a ZIP with reveal.js slides first').classes('text-orange-7')
             else:
-                ui.label('✅ Ready to upload').classes('text-green-7')
+                ui.label('âœ… Ready to upload').classes('text-green-7')
     
     def _render_download_section(self):
         """Render download & reconstitute section."""
@@ -309,7 +314,7 @@ class HomePage:
             create_deck_via_define_api(deck_json)
             
             ui.notify(f'Deck opened in browser! Plots at {base_url}', type='positive')
-            self._update_status(f'✅ Deck opened. Plots at {base_url}')
+            self._update_status(f'âœ… Deck opened. Plots at {base_url}')
             
         except Exception as e:
             logger.error(f'Error uploading: {e}', exc_info=True)
@@ -335,14 +340,113 @@ class HomePage:
         for block in slide.get('blocks', []):
             if block.get('type') in ['iframe', 'image'] and 'value' in block:
                 old_path = block['value']
-                # Convert local path to HTTPS URL
+                # Convert local path to HTTPS URL or base64
                 if not old_path.startswith('http'):
                     try:
-                        # URL-encode for special characters (#, spaces, etc.)
-                        encoded_path = quote(old_path, safe='/')
-                        block['value'] = f"{base_url}/plots/{encoded_path}"
+                        if block.get('type') == 'image':
+                            # Convert images to base64 data URLs
+                            block['value'] = self._convert_image_to_base64(old_path)
+                        else:
+                            # For iframes, use HTTPS URL
+                            # URL-encode for special characters (#, spaces, etc.)
+                            encoded_path = quote(old_path, safe='/')
+                            block['value'] = f"{base_url}/plots/{encoded_path}"
                     except Exception as e:
                         logger.warning(f"Could not transform URL {old_path}: {e}")
+    
+    def _convert_image_to_base64(self, image_path: str) -> str:
+        """Convert an image file to a base64 data URL."""
+        # Resolve full path
+        full_path = self.session.extracted_folder / image_path
+        
+        if not full_path.exists():
+            logger.warning(f"Image file not found: {full_path}")
+            return image_path  # Return original path as fallback
+        
+        # Detect MIME type
+        mime_type, _ = mimetypes.guess_type(str(full_path))
+        if not mime_type or not mime_type.startswith('image/'):
+            mime_type = 'image/png'  # Default fallback
+        
+        # Read and encode image
+        with open(full_path, 'rb') as f:
+            image_data = f.read()
+            base64_data = base64.b64encode(image_data).decode('utf-8')
+        
+        # Create data URL
+        data_url = f"data:{mime_type};base64,{base64_data}"
+        logger.info(f"Converted image to base64: {image_path} ({len(base64_data)} chars)")
+        return data_url
+
+    def _convert_base64_to_image_paths(self, html_content: str, output_folder: Path, data_folder_name: str) -> str:
+        """Convert base64 image data URLs in HTML back to file paths."""
+        if not html_content:
+            return html_content
+        
+        if not self.session.extracted_folder or not self.session.extracted_folder.exists():
+            return html_content
+
+        # Build hash map of original images for lookup
+        image_map = self._build_image_hash_map()
+        created_images: list[Path] = []
+        created_count = 0
+
+        pattern = re.compile(r'"data:(?P<mime>image/[^"]+?);base64,(?P<data>[^"]+)"')
+
+        def replace(match):
+            nonlocal created_count
+            mime_type = match.group('mime')
+            base64_data = match.group('data')
+
+            try:
+                image_bytes = base64.b64decode(base64_data)
+            except Exception:
+                logger.warning('Failed to decode base64 image data during reconstitution')
+                return match.group(0)
+
+            digest = hashlib.md5(image_bytes).hexdigest()
+
+            rel_path = image_map.get(digest)
+            if not rel_path:
+                # Create new image file under <data_folder>/config/embedded_images
+                ext = mimetypes.guess_extension(mime_type) or '.png'
+                rel_path = Path(data_folder_name) / 'config' / 'embedded_images' / f'embedded_{created_count}{ext}'
+                created_count += 1
+                dest_file = output_folder / rel_path
+                dest_file.parent.mkdir(parents=True, exist_ok=True)
+                dest_file.write_bytes(image_bytes)
+                image_map[digest] = rel_path
+                created_images.append(rel_path)
+            return f'"{rel_path.as_posix()}"'
+
+        updated_html = pattern.sub(replace, html_content)
+
+        if created_images:
+            logger.info(f'Created {len(created_images)} embedded image files during reconstitution')
+
+        return updated_html
+
+    def _build_image_hash_map(self) -> dict[str, Path]:
+        """Build mapping of image file hashes to relative paths from the session."""
+        image_map: dict[str, Path] = {}
+        if not self.session.extracted_folder or not self.session.extracted_folder.exists():
+            return image_map
+
+        for item in self.session.extracted_folder.rglob('*'):
+            if not item.is_file():
+                continue
+            mime_type, _ = mimetypes.guess_type(str(item))
+            if not mime_type or not mime_type.startswith('image/'):
+                continue
+            try:
+                data = item.read_bytes()
+            except Exception as exc:
+                logger.warning(f'Failed to read image {item}: {exc}')
+                continue
+            digest = hashlib.md5(data).hexdigest()
+            rel_path = item.relative_to(self.session.extracted_folder)
+            image_map[digest] = rel_path
+        return image_map
     
     async def _handle_download_reconstitute(self, e):
         """Handle downloaded ZIP from Slides.com and reconstitute for delivery."""
@@ -375,46 +479,113 @@ class HomePage:
             html_content = index_file.read_text(encoding='utf-8')
             
             # Replace HTTPS URLs with local paths
-            # Pattern: https://localhost:8766/plots/... → data/...
+            # Pattern: https://localhost:8766/plots/InakiPhos_data/... → InakiPhos_data/...
             https_port = self.config.local_server_port + 1
             base_https = f'https://localhost:{https_port}/plots/'
             
-            # Simple replacement: HTTPS server URLs → data/ folder
-            html_content = html_content.replace(base_https, 'data/')
+            # Simple replacement: HTTPS server URLs → direct relative paths
+            html_content = html_content.replace(base_https, '')
+            
+            # Detect the data folder name (e.g., InakiPhos_data)
+            data_folder_name = None
+            if self.session.extracted_folder and self.session.extracted_folder.exists():
+                for item in self.session.extracted_folder.iterdir():
+                    if item.is_dir() and item.name.endswith('_data'):
+                        data_folder_name = item.name
+                        break
+            
+            # If no _data folder found, look for any folder in extracted_folder
+            if not data_folder_name and self.session.extracted_folder:
+                folders = [d.name for d in self.session.extracted_folder.iterdir() if d.is_dir()]
+                data_folder_name = folders[0] if folders else 'data'
+            
+            if not data_folder_name:
+                data_folder_name = 'data'
+            
+            # Move lib/ references to <data_folder>/config/lib/
+            html_content = html_content.replace('lib/', f'{data_folder_name}/config/lib/')
+            
+            # Find and move deck folder references to <data_folder>/config/
+            # Pattern: Look for references to deck folders
+            for item in download_folder.iterdir():
+                if item.is_dir() and item.name not in ['lib']:
+                    # This is likely the deck folder
+                    deck_name = item.name
+                    html_content = html_content.replace(f'"{deck_name}/', f'"{data_folder_name}/config/{deck_name}/')
             
             # Also decode URL-encoded characters
             from urllib.parse import unquote
-            # Find all data/ references and decode them
-            import re
+            # Find all path references and decode them
             def decode_path(match):
                 path = match.group(1)
-                return f'"data/{unquote(path)}"'
+                return f'"{unquote(path)}"'
             
-            html_content = re.sub(r'"data/([^"]+)"', decode_path, html_content)
+            html_content = re.sub(r'"([^"]+)"', decode_path, html_content)
             
-            # Write updated index.html
-            index_file.write_text(html_content, encoding='utf-8')
+            # Create clean output folder (just index.html + data/)
+            output_folder = Path(tempfile.gettempdir()) / 'slides_output' / downloaded_zip.stem
+            if output_folder.exists():
+                shutil.rmtree(output_folder)
+            output_folder.mkdir(parents=True, exist_ok=True)
             
-            # Copy plot files to data/ folder if we have session data
+            # Copy all original files to root of output folder
             if self.session.extracted_folder and self.session.extracted_folder.exists():
-                data_folder = download_folder / 'data'
-                data_folder.mkdir(exist_ok=True)
+                self._update_status('Copying all files from session...')
                 
-                self._update_status('Copying plot files...')
-                # Copy all plot files from session
-                for plot_file in self.session.plot_files:
-                    rel_path = plot_file.relative_to(self.session.extracted_folder)
-                    dest_file = data_folder / rel_path
-                    dest_file.parent.mkdir(parents=True, exist_ok=True)
-                    shutil.copy(plot_file, dest_file)
+                # Copy entire extracted folder contents to output root
+                # This includes: HTML plots, Excel files, TSV, CSV, images, etc.
+                file_count = 0
+                for item in self.session.extracted_folder.rglob('*'):
+                    if item.is_file():
+                        # Skip the reveal.js slide deck itself
+                        if item.name in ['index.html', 'index.htm']:
+                            continue
+                        
+                        rel_path = item.relative_to(self.session.extracted_folder)
+                        dest_file = output_folder / rel_path
+                        dest_file.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy(item, dest_file)
+                        file_count += 1
+                
+                ui.notify(f'Copied {file_count} data files', type='info')
+            
+            # Copy lib/ and deck folders from downloaded ZIP to <data_folder>/config/
+            self._update_status('Copying reveal.js infrastructure...')
+            config_folder = output_folder / data_folder_name / 'config'
+            config_folder.mkdir(parents=True, exist_ok=True)
+            
+            config_count = 0
+            for item in download_folder.iterdir():
+                # Skip index.html, but copy lib/ and any deck folders
+                if item.name.lower() in ['index.html', 'index.htm']:
+                    continue
+                
+                dest = config_folder / item.name
+                if item.is_dir():
+                    shutil.copytree(item, dest, dirs_exist_ok=True)
+                    # Count files in copied directory
+                    config_count += sum(1 for _ in dest.rglob('*') if _.is_file())
+                else:
+                    shutil.copy(item, dest)
+                    config_count += 1
+            
+            ui.notify(f'Copied {config_count} reveal.js config files to {data_folder_name}/config/', type='info')
+
+            # Convert base64 image data URLs back to file paths
+            self._update_status('Converting base64 images to file references...')
+            html_content = self._convert_base64_to_image_paths(html_content, output_folder, data_folder_name)
+
+            # Write updated index.html to output folder
+            output_index = output_folder / 'index.html'
+            output_index.write_text(html_content, encoding='utf-8')
             
             # Success - open folder
-            ui.notify(f'✅ Reconstituted deck ready at: {download_folder}', type='positive', timeout=5000)
-            self._update_status(f'Ready at: {download_folder}')
+            ui.notify(f'\u2705 Reconstituted deck ready at: {output_folder}', type='positive', timeout=5000)
+            self._update_status(f'Ready at: {output_folder}')
             
             # Open in file explorer
             import subprocess
-            subprocess.run(['explorer', str(download_folder)])
+            subprocess.run(['explorer', str(output_folder)])
             
         except Exception as e:
             logger.error(f'Error reconstituting download: {e}', exc_info=True)

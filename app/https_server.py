@@ -5,6 +5,7 @@ Uses self-signed certificates for local HTTPS serving.
 import asyncio
 from pathlib import Path
 from typing import Optional
+from urllib.parse import unquote
 from aiohttp import web
 import ssl
 import logging
@@ -134,6 +135,8 @@ class HTTPSPlotServer:
     async def serve_plot(self, request: web.Request) -> web.Response:
         """Serve a specific plot file (supports subfolders)."""
         filename = request.match_info['filename']
+        # Decode URL-encoded filename (e.g., %20 -> space)
+        filename = unquote(filename)
         file_path = self.plots_folder / filename
         
         if not file_path.exists() or not file_path.is_file():

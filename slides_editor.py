@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Main entry point for slides_editor application.
 A NiceGUI-based tool for editing reveal.js slide decks with Slides.com integration.

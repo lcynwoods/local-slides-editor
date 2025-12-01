@@ -408,7 +408,7 @@ def convert_html_to_json(html_path: Path, output_path: Optional[Path] = None) ->
         output_path = html_path.with_suffix('.json')
         
     output_path.write_text(
-        json.dumps(deck_json, indent=2),
+        json.dumps(deck_json, indent=2, ensure_ascii=False),
         encoding='utf-8'
     )
     

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Plots page UI for slides_editor.
 Lists and manages Plotly HTML files with click-to-copy URLs.
@@ -10,6 +11,7 @@ import pyperclip
 
 from ..config import Config
 from ..utils.file_utils import get_plot_files
+from ..utils.reveal_detector import is_reveal_slides
 
 
 class PlotsPage:
@@ -86,7 +88,7 @@ class PlotsPage:
         
         if not plots_folder:
             with self.plot_container:
-                ui.label('ℹ️ Upload a ZIP file on the Home page to see plots here.')
+                ui.label('\u2139\ufe0f Upload a ZIP file on the Home page to see plots here.')
             return
         
         plot_files = get_plot_files(plots_folder)
@@ -99,9 +101,12 @@ class PlotsPage:
         # Filter by search term
         if self.search_term:
             plot_files = [
-                f for f in plot_files
+                f for f in plot_files 
                 if self.search_term.lower() in f.name.lower()
             ]
+        
+        # Filter out reveal.js slides (only show actual plots)
+        plot_files = [f for f in plot_files if not is_reveal_slides(f)]
         
         with self.plot_container:
             ui.label(f'Found {len(plot_files)} plot file(s)').classes('text-grey-7 mb-2')
@@ -156,8 +161,13 @@ class PlotsPage:
             
             # Expandable preview
             with ui.expansion('Preview', icon='visibility').classes('w-full'):
-                # Embed the plot as iframe
-                ui.html(f'<iframe src="{plot_url}" width="100%" height="500" frameborder="0"></iframe>', sanitize=False)
+                # Embed the plot as iframe - full width and taller
+                ui.html(
+                    f'<iframe src="{plot_url}" '
+                    f'style="width: 100%; height: 600px; border: none;" '
+                    f'frameborder="0"></iframe>',
+                    sanitize=False
+                ).classes('w-full')
     
     def _copy_url(self, iframe_code: str, filename: str):
         """Copy iframe URL to clipboard."""
