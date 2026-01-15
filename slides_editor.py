@@ -24,6 +24,7 @@ class SessionState:
         self.reveal_slides: list[Path] = []  # Detected reveal.js files
         self.plot_files: list[Path] = []  # Detected plot HTML files
         self.server_running: bool = False  # Server status
+        self.custom_assets: list[dict] = []  # Additional assets added by user
     
     def reset(self):
         """Clear session state."""
@@ -31,6 +32,7 @@ class SessionState:
         self.user_uploads_folder = None
         self.reveal_slides = []
         self.plot_files = []
+        self.custom_assets = []
         # Don't reset server_running - that's independent
 
 
