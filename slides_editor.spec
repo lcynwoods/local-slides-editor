@@ -3,6 +3,16 @@
 PyInstaller spec file for slides_editor.
 Builds a Windows executable with all dependencies bundled.
 """
+import os
+import sys
+
+# Find site-packages in current environment
+if hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix):
+    # Virtual environment
+    site_packages = os.path.join(sys.prefix, 'Lib', 'site-packages')
+else:
+    # Conda or system
+    site_packages = os.path.join(sys.prefix, 'Lib', 'site-packages')
 
 block_cipher = None
 
@@ -11,16 +21,20 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
-        # Include NiceGUI static files
-        ('venv/Lib/site-packages/nicegui', 'nicegui'),
+        # Include NiceGUI static files (auto-detect from environment)
+        (os.path.join(site_packages, 'nicegui'), 'nicegui'),
     ],
     hiddenimports=[
         'nicegui',
         'aiohttp',
         'pyperclip',
         'appdirs',
+        'cryptography',
+        'bs4',
+        'lxml',
         'app.config',
         'app.local_server',
+        'app.https_server',
         'app.slides_api',
         'app.ui.home',
         'app.ui.plots',
@@ -28,6 +42,8 @@ a = Analysis(
         'app.utils.zip_utils',
         'app.utils.file_utils',
         'app.utils.find_replace',
+        'app.utils.reveal_detector',
+        'app.utils.html_to_json',
     ],
     hookspath=[],
     hooksconfig={},

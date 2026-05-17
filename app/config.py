@@ -39,7 +39,8 @@ class Config:
             "slides_api_token": None,
             "local_server_port": 8765,
             "server_running": False,
-            "last_upload_timestamp": None
+            "last_upload_timestamp": None,
+            "output_folder": None
         }
     
     def save(self) -> None:
@@ -136,6 +137,18 @@ class Config:
     def deck_zip_file(self, value: Optional[Path]) -> None:
         """Set the deck ZIP file path."""
         self._data["deck_zip_file"] = str(value) if value else None
+        self.save()
+    
+    @property
+    def output_folder(self) -> Optional[Path]:
+        """Get the output folder path for reconstituted decks."""
+        folder = self._data.get("output_folder")
+        return Path(folder) if folder else None
+    
+    @output_folder.setter
+    def output_folder(self, value: Optional[Path]) -> None:
+        """Set the output folder path for reconstituted decks."""
+        self._data["output_folder"] = str(value) if value else None
         self.save()
     
     def reset(self) -> None:

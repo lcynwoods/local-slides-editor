@@ -59,3 +59,11 @@ tmp/
 # Application specific
 config.json
 *.zip
+test_encoding.txt
+app/https_server.py.backup
+app/local_server.py.backup
+app/ui/home.py.backup
+app/ui/gallery.py
+
+
+

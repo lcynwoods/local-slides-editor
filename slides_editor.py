@@ -3,6 +3,15 @@
 Main entry point for slides_editor application.
 A NiceGUI-based tool for editing reveal.js slide decks with Slides.com integration.
 """
+import sys
+import os
+
+# Fix for PyInstaller: ensure sys.stdout/stderr are not None (uvicorn logging requires isatty())
+if sys.stdout is None:
+    sys.stdout = open(os.devnull, 'w')
+if sys.stderr is None:
+    sys.stderr = open(os.devnull, 'w')
+
 import asyncio
 import logging
 from pathlib import Path
@@ -14,6 +23,7 @@ from app.https_server import HTTPSPlotServer
 from app.ui.home import HomePage
 from app.ui.plots import PlotsPage
 from app.ui.advanced import AdvancedPage
+from app.ui.gallery import GalleryPage
 
 
 class SessionState:
@@ -128,18 +138,19 @@ class SlidesEditorApp:
     def _render_header(self):
         """Render page header with navigation."""
         with ui.header().classes('items-center justify-between'):
-            ui.label('📊 Slides Editor').classes('text-h5')
+            ui.label('Slides Editor').classes('text-h5')
             
             with ui.row():
                 ui.link('Home', '/').classes('text-white')
-                ui.link('Plots', '/plots').classes('text-white ml-4')
+                ui.link('Plots', '/plots').classes('text-white ml-10')
                 ui.link('Advanced', '/advanced').classes('text-white ml-4')
+                ui.link('Gallery', '/gallery').classes('text-white ml-4')
     
     def _render_footer(self):
         """Render page footer with server status."""
         with ui.footer().classes('bg-grey-2'):
             with ui.row().classes('w-full justify-between items-center'):
-                server_status = '🟢 Running' if self.plot_server and self.plot_server.is_running() else '🔴 Stopped'
+                server_status = 'Running' if self.plot_server and self.plot_server.is_running() else 'Stopped'
                 ui.label(f'Plot Server: {server_status}')
                 
                 if self.plot_server:
@@ -171,6 +182,14 @@ class SlidesEditorApp:
             advanced = AdvancedPage(self.config)
             advanced.render()
             self._render_footer()
+        
+        @ui.page('/gallery')
+        def gallery_page():
+            """Widget gallery page route."""
+            self._render_header()
+            gallery = GalleryPage()
+            gallery.render()
+            self._render_footer()
     
     def run(self, **kwargs):
         """Run the application."""
@@ -183,7 +202,6 @@ class SlidesEditorApp:
         # Run NiceGUI app
         ui.run(
             title='Slides Editor',
-            favicon='📊',
             **kwargs
         )
 

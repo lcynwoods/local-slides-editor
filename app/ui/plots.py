@@ -3,9 +3,9 @@
 Plots page UI for slides_editor.
 Lists and manages Plotly HTML files with click-to-copy URLs.
 """
-from nicegui import ui, app
+from nicegui import ui
 from pathlib import Path
-from typing import Optional, List
+from typing import Optional
 from urllib.parse import quote
 import pyperclip
 
@@ -26,56 +26,12 @@ class PlotsPage:
     def render(self):
         """Render the plots page."""
         with ui.column().classes('w-full max-w-6xl mx-auto p-4'):
-            ui.markdown('# 📈 Plot Files')
-            ui.markdown('*Click any plot to copy its iframe URL*')
-            
-            ui.separator()
-            
-            # Search and controls
-            self._render_controls()
-            
-            ui.separator()
+            ui.markdown('# Plot Files')
+            ui.markdown('*Click copy to get the URL*')
             
             # Plot list
             self.plot_container = ui.column().classes('w-full gap-2')
             self._render_plot_list()
-    
-    def _render_controls(self):
-        """Render search and control buttons."""
-        with ui.card().classes('w-full'):
-            with ui.row().classes('w-full items-center gap-2'):
-                # Search input
-                search_input = ui.input(
-                    'Search plots',
-                    placeholder='Filter by filename...'
-                ).classes('flex-grow')
-                search_input.on('input', lambda e: self._search_plots(e.value))
-                
-                # Refresh button
-                ui.button('Refresh', on_click=self._render_plot_list, icon='refresh')
-                
-                # Open plots folder button
-                plots_folder = self.session.extracted_folder if self.session else None
-                if plots_folder:
-                    ui.button(
-                        'Open Folder',
-                        on_click=lambda: self._open_in_explorer(plots_folder),
-                        icon='folder_open'
-                    )
-            
-            # Manual URL generator
-            with ui.expansion('Manual URL Generator', icon='link').classes('w-full mt-2'):
-                with ui.row().classes('w-full items-center gap-2'):
-                    filename_input = ui.input(
-                        'Plot filename',
-                        placeholder='example_plot.html'
-                    ).classes('flex-grow')
-                    
-                    ui.button(
-                        'Generate & Copy URL',
-                        on_click=lambda: self._copy_manual_url(filename_input.value),
-                        icon='content_copy'
-                    )
     
     def _render_plot_list(self):
         """Render list of plot files."""
@@ -88,7 +44,7 @@ class PlotsPage:
         
         if not plots_folder:
             with self.plot_container:
-                ui.label('\u2139\ufe0f Upload a ZIP file on the Home page to see plots here.')
+                ui.label('Upload a ZIP file on the Home page to see plots here.')
             return
         
         plot_files = get_plot_files(plots_folder)
@@ -130,13 +86,12 @@ class PlotsPage:
         # URL-encode path to handle special characters like # in filenames
         encoded_path = quote(str(relative_path).replace('\\', '/'), safe='/')
         plot_url = f'https://localhost:{https_port}/plots/{encoded_path}'
-        iframe_code = f'<iframe src="{plot_url}" width="100%" height="500"></iframe>'
         
         with ui.card().classes('w-full'):
             # Header with file info and actions
             with ui.row().classes('w-full items-center gap-4 mb-2'):
                 # Icon
-                ui.icon('insert_chart', size='lg').classes('text-blue-5')
+                ui.icon('insert_chart', size='lg').classes('text-orange-6')
                 
                 # File info
                 with ui.column().classes('flex-grow'):
@@ -151,13 +106,13 @@ class PlotsPage:
                 with ui.row().classes('gap-2'):
                     ui.button(
                         icon='content_copy',
-                        on_click=lambda: self._copy_url(iframe_code, plot_file.name)
-                    ).props('flat').tooltip('Copy iframe code')
+                        on_click=lambda url=plot_url, name=plot_file.name: self._copy_url(url, name)
+                    ).props('flat color=orange').tooltip('Copy URL')
                     
                     ui.button(
                         icon='open_in_new',
-                        on_click=lambda: ui.open(plot_url, new_tab=True)
-                    ).props('flat').tooltip('Open in new tab')
+                        on_click=lambda url=plot_url: ui.navigate.to(url, new_tab=True)
+                    ).props('flat color=orange').tooltip('Open in new tab')
             
             # Expandable preview
             with ui.expansion('Preview', icon='visibility').classes('w-full'):
@@ -169,14 +124,14 @@ class PlotsPage:
                     sanitize=False
                 ).classes('w-full')
     
-    def _copy_url(self, iframe_code: str, filename: str):
-        """Copy iframe URL to clipboard."""
+    def _copy_url(self, url: str, filename: str):
+        """Copy URL to clipboard."""
         try:
-            pyperclip.copy(iframe_code)
-            ui.notify(f'Copied iframe code for {filename}!', type='positive')
+            pyperclip.copy(url)
+            ui.notify(f'Copied URL for {filename}!', type='positive')
         except Exception as e:
             # Fallback if pyperclip fails
-            ui.notify(f'URL: {iframe_code}', type='info', position='top')
+            ui.notify(f'URL: {url}', type='info', position='top')
     
     def _copy_manual_url(self, filename: str):
         """Generate and copy URL for manually entered filename."""

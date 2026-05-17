@@ -148,31 +148,15 @@ class HTTPSPlotServer:
         except ValueError:
             return web.Response(text="Invalid path", status=403)
         
-        # Determine content type
-        content_type = 'text/html'
-        if filename.endswith('.png'):
-            content_type = 'image/png'
-        elif filename.endswith('.jpg') or filename.endswith('.jpeg'):
-            content_type = 'image/jpeg'
-        elif filename.endswith('.svg'):
-            content_type = 'image/svg+xml'
-        
-        # Add CORS headers for Slides.com
-        headers = {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, OPTIONS',
-            'Access-Control-Allow-Headers': '*'
-        }
-        
         try:
-            if content_type.startswith('image/'):
-                with open(file_path, 'rb') as f:
-                    content = f.read()
-                return web.Response(body=content, content_type=content_type, headers=headers)
-            else:
-                with open(file_path, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                return web.Response(text=content, content_type=content_type, headers=headers)
+            # Use FileResponse for efficient streaming with caching
+            response = web.FileResponse(path=file_path, headers={
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, OPTIONS',
+                'Access-Control-Allow-Headers': '*',
+                'Cache-Control': 'public, max-age=300'
+            })
+            return response
         except Exception as e:
             logger.error(f"Error serving plot {filename}: {e}")
             return web.Response(text="Error serving plot", status=500)
